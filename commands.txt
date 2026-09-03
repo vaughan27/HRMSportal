@@ -4,3 +4,7 @@ uv sync
 uv run alembic revision --autogenerate -m "create lead_enquiry table"
 uv run alembic upgrade head
 uv run uvicorn app.main:app --reload
+
+cd hrms/frontend
+npm install
+npm run dev

@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 
@@ -8,7 +9,7 @@ from app.models.lead_enquiry import PriorityEnum
 class LeadEnquiryBase(BaseModel):
     product_code: str
     product_name: str
-    product_description: str
+    product_description: Optional[str] = None
 
     customer_name: str
     customer_phone: str
