@@ -2,6 +2,7 @@ cd hrms/backend
 cp .env.example .env   # set your DATABASE_URL
 uv sync
 uv run alembic revision --autogenerate -m "create lead_enquiry table"
+uv run alembic revision --autogenerate -m "create location and salesmen tables" -> dir alembic.ini
 uv run alembic upgrade head
 uv run uvicorn app.main:app --reload
 
