@@ -67,7 +67,7 @@ export default function LeadEnquiryPage() {
     <div className="lead-enquiry-page">
       <div className="lead-enquiry-form-column">
         <div className="lead-enquiry-heading">
-          <h1>New lead enquiry</h1>
+          <h1>Customer Wishlist</h1>
           <p>Log an incoming enquiry so it can be tracked through to a sale.</p>
         </div>
 

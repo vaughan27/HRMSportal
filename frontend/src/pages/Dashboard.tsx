@@ -7,7 +7,7 @@ export default function Dashboard() {
         HRMS
       </h1>
       <p style={{ color: "var(--color-ink-muted)", marginBottom: 24 }}>
-        Pages will be added here as we build them.
+        More pages coming soon...
       </p>
       <Link
         to="/lead-enquiries"
@@ -22,7 +22,7 @@ export default function Dashboard() {
           fontSize: "0.9rem",
         }}
       >
-        New lead enquiry
+        Customer Wishlist
       </Link>
     </div>
   );
