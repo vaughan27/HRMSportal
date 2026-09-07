@@ -1,3 +1,5 @@
+#consistent password : SuperAdmin456
+
 cd hrms/backend
 cp .env.example .env   # set your DATABASE_URL
 uv sync
@@ -9,3 +11,7 @@ uv run uvicorn app.main:app --reload
 cd hrms/frontend
 npm install
 npm run dev
+
+#to create users
+   uv run python scripts/create_admin.py
+
