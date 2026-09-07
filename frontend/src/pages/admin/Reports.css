@@ -1,0 +1,81 @@
+.admin-reports-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+.admin-reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 32px;
+}
+
+.admin-reports-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.logout-link {
+  background: none;
+  border: none;
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.logout-link:hover {
+  color: var(--color-ink);
+}
+
+.report-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.report-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.report-card p {
+  color: var(--color-ink-muted);
+  margin: 0 0 20px;
+  font-size: 0.9rem;
+}
+
+.report-card .submit-button {
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.report-card .submit-button:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.report-card .submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.report-card .form-banner {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
