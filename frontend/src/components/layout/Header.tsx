@@ -31,6 +31,10 @@ export default function Header() {
         >
           Customer Wishlist
         </NavLink>
+
+        <NavLink to="/admin" className="app-header__admin-button">
+          Admin
+        </NavLink>
       </nav>
     </header>
   );

@@ -30,7 +30,7 @@ export default function AdminReportsPage() {
       </div>
 
       <section className="report-card">
-        <h2>Lead enquiries</h2>
+        <h2>Customer Wishlist</h2>
         <p>Download every lead enquiry recorded so far as an Excel spreadsheet.</p>
 
         {error && <div className="form-banner form-banner--error">{error}</div>}

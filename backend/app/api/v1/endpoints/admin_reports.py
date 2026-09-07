@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from openpyxl import Workbook
 from sqlalchemy.orm import Session
+from datetime import datetime, timezone, timedelta
 
 from app.api.deps import get_current_admin, get_db
 from app.models.lead_enquiry import LeadEnquiry
@@ -36,7 +37,7 @@ def export_lead_enquiries(
 
     wb = Workbook()
     ws = wb.active
-    ws.title = "Lead Enquiries"
+    ws.title = "Customer Wishlist"
 
     ws.append([header for _, header in COLUMNS])
 
@@ -59,7 +60,8 @@ def export_lead_enquiries(
     wb.save(buffer)
     buffer.seek(0)
 
-    filename = f"lead_enquiries_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.xlsx"
+    kuwait_time = datetime.now(timezone.utc) + timedelta(hours=3)
+    filename = f"customer_wishlist_{kuwait_time.strftime('%Y%m%d_%H%M%S')}.xlsx"
     return StreamingResponse(
         buffer,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
