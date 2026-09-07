@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Any
 
-from jose import jwt
+from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from app.core.config import settings
@@ -23,3 +23,12 @@ def create_access_token(subject: str | Any, expires_minutes: int | None = None) 
     )
     to_encode = {"exp": expire, "sub": str(subject)}
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm="HS256")
+
+
+def decode_access_token(token: str) -> str | None:
+    """Returns the subject (admin id as string) if the token is valid, else None."""
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        return payload.get("sub")
+    except JWTError:
+        return None

@@ -6,9 +6,10 @@ from sqlalchemy import engine_from_config, pool
 from app.core.config import settings
 from app.core.database import Base
 # Import all models here so Alembic can autogenerate migrations from them:
-from app.models.lead_enquiry import LeadEnquiry 
-from app.models.location import Location
-from app.models.salesman import Salesman
+from app.models.lead_enquiry import LeadEnquiry  # noqa
+from app.models.location import Location  # noqa
+from app.models.salesman import Salesman  # noqa
+from app.models.admin_user import AdminUser  # noqa
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
