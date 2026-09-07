@@ -1,7 +1,10 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import PrioritySelect from "@/components/ui/PrioritySelect";
+import SearchSelect from "@/components/ui/SearchSelect";
 import { createLeadEnquiry } from "@/api/leadEnquiry";
+import { searchLocations } from "@/api/location";
+import { searchSalesmen } from "@/api/salesman";
 import { emptyLeadEnquiryForm } from "@/types/leadEnquiry";
 import type { LeadEnquiryFormData, Priority } from "@/types/leadEnquiry";
 import "./LeadEnquiry.css";
@@ -25,6 +28,11 @@ export default function LeadEnquiryPage() {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: false }));
     }
+  }
+
+  function setLookupPair(codeField: FieldName, nameField: FieldName, code: string, name: string) {
+    setForm((prev) => ({ ...prev, [codeField]: code, [nameField]: name }));
+    setErrors((prev) => ({ ...prev, [codeField]: false, [nameField]: false }));
   }
 
   function validate(): boolean {
@@ -138,53 +146,37 @@ export default function LeadEnquiryPage() {
 
           <section className="form-section">
             <h2>Sales rep</h2>
-            <div className="field-row">
-              <div className="field">
-                <label htmlFor="salesman_code">Salesman code</label>
-                <input
-                  id="salesman_code"
-                  className={fieldClass("salesman_code")}
-                  value={form.salesman_code}
-                  onChange={(e) => setField("salesman_code", e.target.value)}
-                />
-                {errors.salesman_code && <span className="field__error">Required</span>}
-              </div>
-              <div className="field">
-                <label htmlFor="salesman_name">Salesman name</label>
-                <input
-                  id="salesman_name"
-                  className={fieldClass("salesman_name")}
-                  value={form.salesman_name}
-                  onChange={(e) => setField("salesman_name", e.target.value)}
-                />
-                {errors.salesman_name && <span className="field__error">Required</span>}
-              </div>
+            <div className="field">
+              <label htmlFor="salesman">Salesman</label>
+              <SearchSelect
+                id="salesman"
+                placeholder="Search by salesman code or name…"
+                value={{ code: form.salesman_code, name: form.salesman_name }}
+                onChange={(code, name) => setLookupPair("salesman_code", "salesman_name", code, name)}
+                fetchOptions={searchSalesmen}
+                hasError={errors.salesman_code || errors.salesman_name}
+              />
+              {(errors.salesman_code || errors.salesman_name) && (
+                <span className="field__error">Required</span>
+              )}
             </div>
           </section>
 
           <section className="form-section">
             <h2>Location</h2>
-            <div className="field-row">
-              <div className="field">
-                <label htmlFor="location_code">Location code</label>
-                <input
-                  id="location_code"
-                  className={fieldClass("location_code")}
-                  value={form.location_code}
-                  onChange={(e) => setField("location_code", e.target.value)}
-                />
-                {errors.location_code && <span className="field__error">Required</span>}
-              </div>
-              <div className="field">
-                <label htmlFor="location_name">Location name</label>
-                <input
-                  id="location_name"
-                  className={fieldClass("location_name")}
-                  value={form.location_name}
-                  onChange={(e) => setField("location_name", e.target.value)}
-                />
-                {errors.location_name && <span className="field__error">Required</span>}
-              </div>
+            <div className="field">
+              <label htmlFor="location">Location</label>
+              <SearchSelect
+                id="location"
+                placeholder="Search by location code or name…"
+                value={{ code: form.location_code, name: form.location_name }}
+                onChange={(code, name) => setLookupPair("location_code", "location_name", code, name)}
+                fetchOptions={searchLocations}
+                hasError={errors.location_code || errors.location_name}
+              />
+              {(errors.location_code || errors.location_name) && (
+                <span className="field__error">Required</span>
+              )}
             </div>
           </section>
 
@@ -219,7 +211,7 @@ export default function LeadEnquiryPage() {
           <div className="ticket-card__header">
             <span className="ticket-card__eyebrow">Enquiry ticket</span>
             <span className="ticket-card__id">
-              {status === "success" && ticketId ? `#${ticketId + 1}` : "pending"}
+              {status === "success" && ticketId ? `#${ticketId}` : "pending"}
             </span>
           </div>
 

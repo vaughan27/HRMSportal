@@ -29,7 +29,7 @@ export default function Header() {
           to="/lead-enquiries"
           className={({ isActive }) => (isActive ? "is-active" : undefined)}
         >
-          Lead enquiries
+          Customer Wishlist
         </NavLink>
       </nav>
     </header>
