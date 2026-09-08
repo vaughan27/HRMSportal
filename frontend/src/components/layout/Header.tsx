@@ -11,6 +11,7 @@ export default function Header() {
           alt="Morad Yousuf Behbehani"
           className="app-header__logo"
         />
+
         <span className="app-header__name">
           Morad Yousuf Behbehani
         </span>
@@ -20,19 +21,35 @@ export default function Header() {
         <NavLink
           to="/"
           end
-          className={({ isActive }) => (isActive ? "is-active" : undefined)}
+          className={({ isActive }) =>
+            isActive ? "is-active" : undefined
+          }
         >
           Dashboard
         </NavLink>
 
         <NavLink
           to="/lead-enquiries"
-          className={({ isActive }) => (isActive ? "is-active" : undefined)}
+          className={({ isActive }) =>
+            isActive ? "is-active" : undefined
+          }
         >
           Customer Wishlist
         </NavLink>
 
-        <NavLink to="/admin" className="app-header__admin-button">
+        <NavLink
+          to="/staff"
+          className={({ isActive }) =>
+            isActive ? "is-active" : undefined
+          }
+        >
+          Staff Directory
+        </NavLink>
+
+        <NavLink
+          to="/admin"
+          className="app-header__admin-button"
+        >
           Admin
         </NavLink>
       </nav>
