@@ -26,16 +26,16 @@ def get_lead_enquiry(lead_id: int, db: Session = Depends(get_db)):
     return lead
 
 
-@router.put("/{lead_id}", response_model=LeadEnquiryOut)
-def update_lead_enquiry(lead_id: int, payload: LeadEnquiryUpdate, db: Session = Depends(get_db)):
-    lead = crud.update_lead_enquiry(db, lead_id, payload)
-    if not lead:
-        raise HTTPException(status_code=404, detail="Lead enquiry not found")
-    return lead
+# @router.put("/{lead_id}", response_model=LeadEnquiryOut)
+# def update_lead_enquiry(lead_id: int, payload: LeadEnquiryUpdate, db: Session = Depends(get_db)):
+#     lead = crud.update_lead_enquiry(db, lead_id, payload)
+#     if not lead:
+#         raise HTTPException(status_code=404, detail="Lead enquiry not found")
+#     return lead
 
 
-@router.delete("/{lead_id}", status_code=204)
-def delete_lead_enquiry(lead_id: int, db: Session = Depends(get_db)):
-    deleted = crud.delete_lead_enquiry(db, lead_id)
-    if not deleted:
-        raise HTTPException(status_code=404, detail="Lead enquiry not found")
+# @router.delete("/{lead_id}", status_code=204)
+# def delete_lead_enquiry(lead_id: int, db: Session = Depends(get_db)):
+#     deleted = crud.delete_lead_enquiry(db, lead_id)
+#     if not deleted:
+#         raise HTTPException(status_code=404, detail="Lead enquiry not found")

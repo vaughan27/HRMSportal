@@ -10,6 +10,7 @@ from app.models.lead_enquiry import LeadEnquiry  # noqa
 from app.models.location import Location  # noqa
 from app.models.salesman import Salesman  # noqa
 from app.models.admin_user import AdminUser  # noqa
+from app.models.employee import Employee  # noqa
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)

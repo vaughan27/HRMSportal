@@ -5,9 +5,9 @@ from app.core.config import settings
 from app.api.v1.router import api_router
 
 app = FastAPI(title=settings.PROJECT_NAME, 
-    docs_url=None,
+    docs_url="/docs",
     redoc_url=None,
-    openapi_url=None)
+    openapi_url="/openapi.json")
 
 # docs_url="/docs",
 # redoc_url=None,
