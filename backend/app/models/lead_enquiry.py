@@ -18,7 +18,7 @@ class LeadEnquiry(Base):
 
     product_code = Column(String, nullable=False)
     product_name = Column(String, nullable=False)
-    product_description = Column(String, nullable=True)
+    product_description = Column(String, nullable=False)
 
     customer_name = Column(String, nullable=False)
     customer_phone = Column(String, nullable=False)

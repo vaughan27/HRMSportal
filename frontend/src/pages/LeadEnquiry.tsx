@@ -11,11 +11,6 @@ import "./LeadEnquiry.css";
 
 type FieldName = keyof LeadEnquiryFormData;
 
-const REQUIRED_TEXT_FIELDS: { name: FieldName; label: string }[] = [
-  { name: "product_code", label: "Product code" },
-  { name: "product_name", label: "Product name" },
-];
-
 export default function LeadEnquiryPage() {
   const [form, setForm] = useState<LeadEnquiryFormData>(emptyLeadEnquiryForm);
   const [errors, setErrors] = useState<Partial<Record<FieldName, boolean>>>({});
@@ -38,7 +33,7 @@ export default function LeadEnquiryPage() {
   function validate(): boolean {
     const nextErrors: Partial<Record<FieldName, boolean>> = {};
     (Object.keys(emptyLeadEnquiryForm) as FieldName[]).forEach((key) => {
-      if (key === "priority" || key === "product_description") return;
+      if (key === "priority") return;
       if (!form[key].trim()) {
         nextErrors[key] = true;
       }
@@ -61,7 +56,9 @@ export default function LeadEnquiryPage() {
       setTicketId(created.id);
       setStatus("success");
       setForm(emptyLeadEnquiryForm);
+      setErrors({});
     } catch (err) {
+      console.error("Failed to submit enquiry:", err);
       setStatus("error");
       setErrorMessage("Couldn't submit the enquiry. Check the backend is running and try again.");
     }
@@ -106,15 +103,18 @@ export default function LeadEnquiryPage() {
             </div>
             <div className="field">
               <label htmlFor="product_description">
-                Product description <span className="field__optional">(optional)</span>
+                Product description
               </label>
               <textarea
                 id="product_description"
-                className="field__input"
+                className={fieldClass("product_description")}
                 rows={3}
                 value={form.product_description}
                 onChange={(e) => setField("product_description", e.target.value)}
               />
+              {errors.product_description && (
+                <span className="field__error">Required</span>
+              )}
             </div>
           </section>
 
