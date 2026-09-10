@@ -227,16 +227,13 @@
    DEPARTMENT BADGE
    ========================= */
 
-.employee-card-department {
+.employee-card-department, .employee-card-designation {
   display: inline-flex;
   align-items: center;
 
   padding: 5px 10px;
 
   border-radius: 999px;
-
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
 
   font-size: 0.72rem;
   font-weight: 650;
@@ -245,6 +242,16 @@
 
   text-transform: uppercase;
   letter-spacing: 0.02em;
+}
+
+.employee-card-department {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.employee-card-designation {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 
 

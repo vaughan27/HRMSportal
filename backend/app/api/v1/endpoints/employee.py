@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from typing import Optional
 
 from app.api.deps import get_current_admin, get_db
 from app.crud import employee as crud
@@ -18,10 +19,28 @@ def create_employee(payload: EmployeeCreate, db: Session = Depends(get_db)):
     return crud.create_employee(db, payload)
 
 
+# @router.get("/", response_model=list[EmployeeOut])
+# def list_employees(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+#     return crud.get_employees(db, skip=skip, limit=limit)
 @router.get("/", response_model=list[EmployeeOut])
-def list_employees(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_employees(db, skip=skip, limit=limit)
-
+def list_employees(
+    search: Optional[str] = Query(None, description="Search by name"),
+    designation: Optional[str] = Query(None),
+    department: Optional[str] = Query(None),
+    location: Optional[str] = Query(None),
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    return crud.get_employees(
+        db,
+        search=search,
+        designation=designation,
+        department=department,
+        location=location,
+        skip=skip,
+        limit=limit,
+    )
 
 @router.get("/{employee_id}", response_model=EmployeeOut)
 def get_employee(employee_id: int, db: Session = Depends(get_db)):

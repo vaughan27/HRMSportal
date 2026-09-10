@@ -9,6 +9,7 @@ export default function StaffDirectory() {
 
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(""); // ← new
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [location, setLocation] = useState("");
@@ -16,9 +17,19 @@ export default function StaffDirectory() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Debounce the search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 250);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  // Now the data-fetching effect depends on the *debounced* value
   useEffect(() => {
     loadEmployees();
-  }, [search, designation, department, location]);
+  }, [debouncedSearch, designation, department, location]);
 
   async function loadEmployees() {
     setLoading(true);
@@ -26,7 +37,7 @@ export default function StaffDirectory() {
 
     try {
       const data = await getEmployees({
-        search,
+        search: debouncedSearch,   // ← use debounced value
         designation,
         department,
         location,
@@ -217,6 +228,13 @@ export default function StaffDirectory() {
                     )}
                     {employee.employee_name}
                   </h2>
+
+                   {/* Designation */}
+                  {employee.employee_designation && (
+                    <span className="employee-card-designation">
+                      {employee.employee_designation}
+                    </span>
+                  )}
 
                   {/* Department */}
                   {employee.employee_department && (
